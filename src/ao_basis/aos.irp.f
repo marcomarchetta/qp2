@@ -65,6 +65,7 @@ END_PROVIDER
         call overlap_gaussian_xyz(C_A,C_A,ao_expo(i,j),ao_expo(i,j), &
            powA,powA,overlap_x,overlap_y,overlap_z,norm,nz)
         ao_coef_normalized(i,j) = ao_coef(i,j)/dsqrt(norm)
+        print*, 'coeff. norm' , 1.d0/dsqrt(norm)
       enddo
     else
       do j=1,ao_prim_num(i)

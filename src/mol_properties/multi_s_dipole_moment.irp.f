@@ -53,7 +53,7 @@
   multi_s_z_dipole_moment = 0.d0
 
   if(mem_tot_tr_dm .lt. 0.9d0 * qp_max_mem) then
- 
+    print*,"Using the transition density matrix"
     do jstate = 1, N_states
       do istate = 1, N_states
         do i = 1, mo_num  
@@ -64,6 +64,10 @@
           enddo
         enddo 
       enddo
+    enddo
+    print*,"one_e_tr_dm_mo = "
+    do i = 1,mo_num
+     write(*,"(100(F16.10,X))")one_e_tr_dm_mo(:,i,1,1)
     enddo
 
   else

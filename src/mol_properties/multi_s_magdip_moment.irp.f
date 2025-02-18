@@ -60,7 +60,7 @@
           do j = 1, mo_num  
             multi_s_x_magdipole_moment(istate,jstate) -= one_e_tr_dm_mo(j,i,istate,jstate) * mo_magdip_x_becke(j,i)  
             multi_s_y_magdipole_moment(istate,jstate) -= one_e_tr_dm_mo(j,i,istate,jstate) * mo_magdip_y_becke(j,i) 
-            multi_s_z_magdipole_moment(istate,jstate) -= one_e_tr_dm_mo(j,i,istate,jstate) * mo_prop_dipole_z(j,i) 
+            multi_s_z_magdipole_moment(istate,jstate) -= one_e_tr_dm_mo(j,i,istate,jstate) * mo_magdip_z_becke(j,i) 
           enddo
         enddo 
       enddo
@@ -90,7 +90,7 @@
     !$OMP        psi_bilinear_matrix_transp_rows, psi_bilinear_matrix_transp_columns, &
     !$OMP        psi_det_alpha_unique, psi_det_beta_unique,                           &
     !$OMP        psi_bilinear_matrix_values, psi_bilinear_matrix_transp_values,       &
-    !$OMP        mo_magdip_x_becke, mo_magdip_y_becke, mo_prop_dipole_z,                               &
+    !$OMP        mo_magdip_x_becke, mo_magdip_y_becke, mo_magdip_z_becke,                               &
     !$OMP        multi_s_x_magdipole_moment, multi_s_y_magdipole_moment, multi_s_z_magdipole_moment)
     !$OMP DO COLLAPSE(2)
     do istate = 1, N_states
@@ -110,7 +110,7 @@
             j = occ(l,1)
             multi_s_x_magdipole_moment(istate,jstate) -= ck * mo_magdip_x_becke(j,j) 
             multi_s_y_magdipole_moment(istate,jstate) -= ck * mo_magdip_y_becke(j,j) 
-            multi_s_z_magdipole_moment(istate,jstate) -= ck * mo_prop_dipole_z(j,j) 
+            multi_s_z_magdipole_moment(istate,jstate) -= ck * mo_magdip_z_becke(j,j) 
           enddo
   
           if (k_a == N_det) cycle
@@ -128,11 +128,11 @@
               ckl = psi_bilinear_matrix_values(k_a,istate)*psi_bilinear_matrix_values(l,jstate) * phase
               multi_s_x_magdipole_moment(istate,jstate) -= ckl * mo_magdip_x_becke(h1,p1) 
               multi_s_y_magdipole_moment(istate,jstate) -= ckl * mo_magdip_y_becke(h1,p1) 
-              multi_s_z_magdipole_moment(istate,jstate) -= ckl * mo_prop_dipole_z(h1,p1) 
+              multi_s_z_magdipole_moment(istate,jstate) -= ckl * mo_magdip_z_becke(h1,p1) 
               ckl = psi_bilinear_matrix_values(k_a,jstate)*psi_bilinear_matrix_values(l,istate) * phase
               multi_s_x_magdipole_moment(istate,jstate) -= ckl * mo_magdip_x_becke(p1,h1) 
               multi_s_y_magdipole_moment(istate,jstate) -= ckl * mo_magdip_y_becke(p1,h1) 
-              multi_s_z_magdipole_moment(istate,jstate) -= ckl * mo_prop_dipole_z(p1,h1) 
+              multi_s_z_magdipole_moment(istate,jstate) -= ckl * mo_magdip_z_becke(p1,h1) 
             endif
             l = l+1
             if (l > N_det) exit
@@ -155,7 +155,7 @@
             j = occ(l,2)
             multi_s_x_magdipole_moment(istate,jstate) -= ck * mo_magdip_x_becke(j,j) 
             multi_s_y_magdipole_moment(istate,jstate) -= ck * mo_magdip_y_becke(j,j) 
-            multi_s_z_magdipole_moment(istate,jstate) -= ck * mo_prop_dipole_z(j,j) 
+            multi_s_z_magdipole_moment(istate,jstate) -= ck * mo_magdip_z_becke(j,j) 
           enddo
       
           if (k_b == N_det) cycle
@@ -173,11 +173,11 @@
               ckl = psi_bilinear_matrix_transp_values(k_b,istate)*psi_bilinear_matrix_transp_values(l,jstate) * phase
               multi_s_x_magdipole_moment(istate,jstate) -= ckl * mo_magdip_x_becke(h1,p1) 
               multi_s_y_magdipole_moment(istate,jstate) -= ckl * mo_magdip_y_becke(h1,p1) 
-              multi_s_z_magdipole_moment(istate,jstate) -= ckl * mo_prop_dipole_z(h1,p1) 
+              multi_s_z_magdipole_moment(istate,jstate) -= ckl * mo_magdip_z_becke(h1,p1) 
               ckl = psi_bilinear_matrix_transp_values(k_b,jstate)*psi_bilinear_matrix_transp_values(l,istate) * phase
               multi_s_x_magdipole_moment(istate,jstate) -= ckl * mo_magdip_x_becke(p1,h1) 
               multi_s_y_magdipole_moment(istate,jstate) -= ckl * mo_magdip_y_becke(p1,h1) 
-              multi_s_z_magdipole_moment(istate,jstate) -= ckl * mo_prop_dipole_z(p1,h1) 
+              multi_s_z_magdipole_moment(istate,jstate) -= ckl * mo_magdip_z_becke(p1,h1) 
             endif
             l = l+1
             if (l > N_det) exit

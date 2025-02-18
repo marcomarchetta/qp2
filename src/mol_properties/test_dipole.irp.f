@@ -46,6 +46,16 @@ implicit none
    enddo
   enddo
 
+  ! Nuclei part
+  nuclei_part_x = 0.d0
+  double precision :: nuclei_part_x 
+  do i = 1,nucl_num 
+    nuclei_part_x += nucl_charge(i) * nucl_coord(i,1) 
+  enddo
+  do i = 1, N_states
+   matrix(i,i) += nuclei_part_x
+  enddo
+
   accu = 0.d0
   do istate = 1, N_states
    do jstate = 1, N_states

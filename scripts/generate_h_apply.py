@@ -130,7 +130,7 @@ class H_apply(object):
   !$OMP END PARALLEL
 
   call dsort(H_jj,iorder,N_det)
-  do k=1,N_states
+  do k=1,min(N_states,N_det)
     psi_coef(iorder(k),k) = 1.d0
   enddo
   deallocate(H_jj,iorder)
